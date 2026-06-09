@@ -1,0 +1,111 @@
+/* E-ink "Paperwhite" look: warm paper background, high-contrast ink, flat,
+   grayscale, no shadows, serif type. */
+
+@define-color window_bg_color #f3f1ea;
+@define-color window_fg_color #1b1a17;
+@define-color view_bg_color #f3f1ea;
+@define-color view_fg_color #1b1a17;
+@define-color headerbar_bg_color #e8e5db;
+@define-color headerbar_fg_color #1b1a17;
+@define-color card_bg_color #faf8f1;
+@define-color card_fg_color #1b1a17;
+@define-color popover_bg_color #faf8f1;
+@define-color popover_fg_color #1b1a17;
+@define-color accent_bg_color #1b1a17;
+@define-color accent_fg_color #f3f1ea;
+@define-color accent_color #1b1a17;
+@define-color borders #8d887b;
+
+* {
+  font-family: "Bookerly", "Literata", "Noto Serif", serif;
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  box-shadow: none;
+}
+
+window, .background {
+  background-color: #f3f1ea;
+  color: #1b1a17;
+}
+
+headerbar {
+  background: #e8e5db;
+  color: #1b1a17;
+  border-bottom: 1px solid #1b1a17;
+  box-shadow: none;
+}
+
+.title-3 { font-weight: bold; }
+.dim-label { color: #6a665b; }
+
+/* Flat, inked buttons */
+button {
+  background-image: none;
+  background-color: #faf8f1;
+  color: #1b1a17;
+  border: 1px solid #1b1a17;
+  border-radius: 2px;
+  box-shadow: none;
+  min-height: 28px;
+}
+button:hover { background-color: #e3dfd2; }
+button:active,
+button:checked {
+  background-color: #1b1a17;
+  color: #f3f1ea;
+}
+button.destructive-action {
+  color: #1b1a17;
+  border-color: #1b1a17;
+}
+
+/* Dropdowns / entries */
+dropdown,
+dropdown > button,
+entry,
+spinbutton {
+  background-color: #faf8f1;
+  color: #1b1a17;
+  border: 1px solid #1b1a17;
+  border-radius: 2px;
+}
+
+/* Sliders: light track, solid ink highlight + square-ish handle */
+scale trough {
+  background-color: #d4d0c3;
+  border: 1px solid #8d887b;
+  border-radius: 0;
+  min-height: 4px;
+}
+scale highlight {
+  background-color: #1b1a17;
+  border-radius: 0;
+}
+scale slider {
+  background-color: #1b1a17;
+  border: 1px solid #1b1a17;
+  border-radius: 2px;
+  min-width: 14px;
+  min-height: 14px;
+  box-shadow: none;
+}
+scale:disabled trough { background-color: #e3dfd2; }
+scale:disabled highlight { background-color: #8d887b; }
+
+/* Switch (EQ) */
+switch {
+  background-color: #d4d0c3;
+  border: 1px solid #1b1a17;
+  border-radius: 2px;
+}
+switch:checked { background-color: #1b1a17; }
+switch slider {
+  background-color: #faf8f1;
+  border-radius: 1px;
+}
+
+/* libadwaita rows */
+row, .card, preferencesgroup, .boxed-list {
+  background-color: #faf8f1;
+  border-radius: 2px;
+}

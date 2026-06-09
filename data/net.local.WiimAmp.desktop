@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=WiiM Amp
+Comment=Control the WiiM Amp
+Exec=python3 -m wiim
+Path=/path/to/wiimamp
+Icon=net.local.WiimAmp
+Terminal=false
+Categories=AudioVideo;Audio;
+StartupWMClass=net.local.WiimAmp
