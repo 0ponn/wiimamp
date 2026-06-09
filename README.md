@@ -50,13 +50,17 @@ to Dash**.
 
 ## Configuration
 
-The amp is addressed at `WiiM-Amp-FCB2.local` (mDNS, survives IP changes). To
-point at a different device, create `~/.config/wiim/config`:
+The app **auto-discovers** the amp on your network via mDNS (Avahi) at startup —
+no configuration needed. To pin a specific device (or skip discovery), create
+`~/.config/wiim/config`:
 
 ```ini
 [device]
 host = 192.0.2.10
 ```
+
+An explicit host always wins; otherwise discovery runs, falling back to a
+built-in default if nothing is found.
 
 ## Development
 

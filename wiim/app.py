@@ -11,7 +11,8 @@ from gi.repository import Adw, Gdk, GLib, Gtk  # noqa: E402
 STYLE_PATH = os.path.join(os.path.dirname(__file__), "style.css")
 
 from wiim.client import WiimClient, decode_hex  # noqa: E402
-from wiim.config import load_host  # noqa: E402
+from wiim.config import config_host, load_host  # noqa: E402
+from wiim.discovery import discover_wiim  # noqa: E402
 from wiim.mpris import MprisController  # noqa: E402
 
 SOURCES = [
@@ -52,6 +53,12 @@ class WiimWindow(Adw.ApplicationWindow):
         except Exception:  # noqa: BLE001 - no session bus / no players
             self.mpris = None
         self._mpris_active = False
+
+        # Auto-find the amp on the LAN unless the user pinned a host in config.
+        # Runs off-thread; the window opens immediately on the fallback host and
+        # rebinds when discovery returns.
+        if config_host() is None:
+            run_async(lambda: discover_wiim(2.0), self._on_discovered)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         box.set_margin_top(16)
@@ -161,6 +168,11 @@ class WiimWindow(Adw.ApplicationWindow):
         self._tick_source = GLib.timeout_add_seconds(1, self._tick)
 
     # --- helpers ---
+    def _on_discovered(self, host, err):
+        if host:
+            self.client.host = host  # rebind all future requests to the found amp
+        return False
+
     def _call(self, fn, on_done=None):
         run_async(fn, on_done or self._noop)
 

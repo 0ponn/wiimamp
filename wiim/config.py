@@ -10,8 +10,18 @@ def config_path():
     return os.path.join(base, "wiim", "config")
 
 
-def load_host():
+def config_host():
+    """The explicit host from the config file, or None if not set."""
     cp = configparser.ConfigParser()
     if cp.read(config_path()) and cp.has_option("device", "host"):
         return cp.get("device", "host")
-    return DEFAULT_HOST
+    return None
+
+
+def load_host():
+    """Resolved host for immediate use: config value, else the mDNS fallback.
+
+    mDNS auto-discovery (wiim.discovery) runs separately and overrides this when
+    no explicit config host is set.
+    """
+    return config_host() or DEFAULT_HOST

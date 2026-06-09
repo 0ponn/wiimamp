@@ -1,7 +1,7 @@
 import os
 import tempfile
 import unittest
-from wiim.config import load_host
+from wiim.config import config_host, load_host
 from wiim.client import DEFAULT_HOST
 
 
@@ -13,6 +13,7 @@ class TestConfig(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             os.environ["XDG_CONFIG_HOME"] = d
             self.assertEqual(load_host(), DEFAULT_HOST)
+            self.assertIsNone(config_host())
 
     def test_reads_host_from_config(self):
         with tempfile.TemporaryDirectory() as d:
